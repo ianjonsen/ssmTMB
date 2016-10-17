@@ -24,7 +24,7 @@ Type objective_function<Type>::operator() () {
 
   vector<Type> tau(2);
   tau(0) = exp(l_tau(0));
-  tau(1) = exp(1);
+  tau(1) = exp(l_tau(1));
 
   matrix<Type> yhat(y.rows(), 2);       // Interpolations
   matrix<Type> d(x.rows() - 1, 2);      // Increments
@@ -69,7 +69,7 @@ Type objective_function<Type>::operator() () {
       nll -= log(dt((y(i, j) - yhat(i, j)) / s, nu, false) / s);
     }
   }
-  
+
   ADREPORT(theta);
   ADREPORT(gamma);
   ADREPORT(sigma);
