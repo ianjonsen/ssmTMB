@@ -54,7 +54,7 @@
 #' }
 ##'
 ##' @useDynLib ssmTMB
-##' @importFrom TMB MakeADFun sdreport sourceCpp
+##' @importFrom TMB MakeADFun sdreport
 ##' @export
 fit_ssm <-
   function(d,
@@ -210,7 +210,7 @@ fit_ssm <-
 ##'
 ##' By default the function uses the same ARGOS multiplication factors
 ##' to scale location accuracy by location class as used in
-##' \package{crawl}.
+##' \pkg{crawl}.
 ##'
 ##' @title ARGOS data pre-processing
 ##' @param d a data frame of observations (see details)
@@ -264,7 +264,7 @@ argos2tmb <-
 ##' ARGOS Error Multiplication Factors for Location Classes
 ##'
 ##' These are the error multiplication factors used to scale location
-##' accuracy for each location class that are used in \package{crawl}.
+##' accuracy for each location class that are used in \pkg{crawl}.
 ##' @title ARGOS Multiplication Factors
 ##' @return A data.frame with columns
 ##' \item{\code{lc}}{ARGOS location class}

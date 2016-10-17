@@ -1,13 +1,16 @@
 Package: ssmTMB
-Title: A fast state-space model for filtering Argos satellite tracking data, implemented in R via Template Model Builder (TMB)
+Title: A fast state-space model for filtering Argos satellite tracking data,
+    implemented in R via Template Model Builder (TMB)
 Version: 0.0.0.9000
 Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
 Description: What the package does (one paragraph).
-Depends: R (>= 3.3.0), TMB
+Depends:
+    R (>= 3.3.0),
+    TMB
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
 URL: http://github.com/ianjonsen/ssmTMB
 BugReports: http://github.com/ianjonsen/issues
 LinkingTo: TMB, RcppEigen
-
+RoxygenNote: 5.0.1
