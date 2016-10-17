@@ -16,7 +16,7 @@ First, ensure you have R version >= 3.3.0 installed:
 R.Version()
 ```
 
-On PC's running Windows, you will need to install [Rtools] (URL: https://cran.r-project.org/bin/windows/Rtools/) 
+On PC's running Windows, you will need to install [Rtools](https://cran.r-project.org/bin/windows/Rtools/) 
 
 Next, you will need to install TMB and it's dependencies:
 ```R
