@@ -23,7 +23,7 @@ Next, you will need to install `TMB` and it's dependencies:
 install.packages("TMB")
 ```
 
-Finally, install the `devtools` package and then the development version of `ssmTMB` from GitHub:
+Finally, install the `devtools` package and finally `ssmTMB` from GitHub:
 
 ```R
 install.packages("devtools")  
