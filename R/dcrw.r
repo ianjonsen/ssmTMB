@@ -45,6 +45,14 @@
 ##' \item{\code{opt}}{the object returned by the optimizer}
 ##' \item{\code{tmb}}{the TMB object}
 ##' \item{\code{aic}}{the calculated Akaike Information Criterion}
+##'
+##' @examples
+#' \dontrun{
+#' # Fit DCRW model for state filtering and regularization
+#' data(ellie)
+#' fit <- fit_ssm(ellie, tstep = 6 / 24)
+#' }
+##'
 ##' @useDynLib ssmTMB
 ##' @importFrom TMB MakeADFun sdreport sourceCpp
 ##' @export
