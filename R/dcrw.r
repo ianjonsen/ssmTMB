@@ -56,6 +56,7 @@
 ##'
 ##' @useDynLib ssmTMB
 ##' @importFrom TMB MakeADFun sdreport
+##' @importFrom stats loess loess.control cov sd predict nlminb
 ##' @export
 fit_ssm <-
   function(d,
