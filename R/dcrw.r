@@ -143,7 +143,7 @@ fit_ssm <-
         data,
         parameters,
         random = "x",
-        DLL = "dcrw",
+        DLL = "ssmTMB",
         silent = !verbose
       )
     obj$env$inner.control$trace <- verbose
