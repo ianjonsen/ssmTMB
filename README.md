@@ -23,9 +23,9 @@ Next, you will need to install TMB and it's dependencies:
 install.packages("TMB")
 ```
 
-Get the development version of ssmTMB from GitHub:
+Finally, install the devtools package and then the development version of ssmTMB from GitHub:
 
 ```R
-# install.packages("devtools")  
+install.packages("devtools")  
 devtools::install_github("ianjonsen/ssmTMB")
 ```
