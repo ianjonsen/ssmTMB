@@ -25,7 +25,7 @@
 ##'
 ##' @title Correlated Random Walk Filter
 ##' @param d a data frame of observations
-##' @param subset define with a logical vector the subset of data records to be filtered
+##' @param subset a logical vector indicating the subset of data records to be filtered
 ##' @param tstep the time step to predict to (in days)
 ##' @param nu degrees of freedom parameter
 ##' @param gamma the autocorrelation parameter used to estimate
