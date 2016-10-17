@@ -1,12 +1,12 @@
 Package: ssmTMB
-Title: A fast state-space model for filtering Argos satellite tracking data,
-    implemented in R via Template Model Builder (TMB)
+Title: A fast state-space model for filtering Argos satellite tracking data using TMB
 Version: 0.0.0.9000
 Authors@R: c(
     person("Ian", "Jonsen", email = "ian.jonsen@mq.edu.au", role = c("aut", "cre")),
     person("Simon", "Wotherspoon", role = "aut")
     )
-Description: Filters and regularises to a specified time step error-prone Argos satellite tracking data
+Description: Filters and regularises to a specified time step error-prone Argos satellite tracking data.
+    Fast estimation is acheived by using the Template Model Builder (TMB) package.
 Depends:
     R (>= 3.3.0),
     TMB
