@@ -10,6 +10,7 @@ This is a minimal package that state-space filters and regularises to a specifie
 Read `?fit_ssm` for details and an example of how to use the package 
 
 ## Installation
+First, ensure you have TMB and dependencies installed:
 
 ```R
 library(TMB)
