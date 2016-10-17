@@ -45,8 +45,8 @@
 ##' \item{\code{opt}}{the object returned by the optimizer}
 ##' \item{\code{tmb}}{the TMB object}
 ##' \item{\code{aic}}{the calculated Akaike Information Criterion}
-##' @useDynLib DCRW
-##' @importFrom TMB MakeADFun sdreport
+##' @useDynLib ssmTMB
+##' @importFrom TMB MakeADFun sdreport sourceCpp
 ##' @export
 fit_ssm <-
   function(d,
@@ -61,14 +61,14 @@ fit_ssm <-
            span = 0.3) {
     optim <- match.arg(optim)
     d <- d[subset,]
-    
+
     ## Ensure POSIXct dates
     d$date <- as.POSIXct(d$date, "%Y-%m-%d %H:%M:%S", tz = "GMT")
     d <- d[order(d$date),]
-    
+
     ## pre-process ARGOS data to obtain interpolation indices & weights generate data list
     tmb <- argos2tmb(d, tstep = tstep, amf = amf)
-    
+
     ## Predict track from loess smooths
     fit.lon <-
       loess(
@@ -86,18 +86,18 @@ fit_ssm <-
         na.action = "na.exclude",
         control = loess.control(surface = "direct")
       )
-    
+
     ## Predict track, increments and stochastic innovations
     xs <-
       cbind(predict(fit.lon, newdata = data.frame(date = as.numeric(tmb$ts))),
             predict(fit.lat, newdata = data.frame(date = as.numeric(tmb$ts))))
-    
+
     ## TMB - create parameter list
     if (is.null(parameters)) {
       ## Estimate increments and stochastic innovations
       ds <- xs[-1,] - xs[-nrow(xs),]
       es <- ds[-1,] - gamma * ds[-nrow(ds),]
-      
+
       ## Estimate components of variance
       V <- cov(es)
       sigma <- sqrt(diag(V))
@@ -105,7 +105,7 @@ fit_ssm <-
       tau <-
         c(sd(fit.lon$residuals / tmb$K[, 1]),
           sd(fit.lat$residuals / tmb$K[, 2]))
-      
+
       parameters <-
         list(
           theta = 0,
@@ -117,7 +117,7 @@ fit_ssm <-
           x = xs
         )
     }
-    
+
     ## TMB - data list
     data <-
       list(
@@ -128,7 +128,7 @@ fit_ssm <-
         nu = nu,
         ts = tstep
       )
-    
+
     ## TMB - create objective function
     obj <-
       TMB::MakeADFun(
@@ -140,7 +140,7 @@ fit_ssm <-
       )
     obj$env$inner.control$trace <- verbose
     obj$env$tracemgc <- verbose
-    
+
     ## Minimize objective function
     opt <-
       suppressWarnings(switch(
@@ -148,11 +148,11 @@ fit_ssm <-
         nlminb = nlminb(obj$par, obj$fn, obj$gr),
         optim = do.call("optim", obj)
       ))
-    
+
     ## Parameters, states and the fitted values
     rep <- TMB::sdreport(obj)
     fxd <- summary(rep, "report")
-    
+
     rdm <-
       matrix(summary(rep, "random"),
              length(tmb$ts),
@@ -160,10 +160,10 @@ fit_ssm <-
              dimnames = list(NULL, c("lon", "lat", "lon.se", "lat.se")))
     ftd <-
       tmb$ws * rdm[tmb$idx + 1, 1:2] + (1 - tmb$ws) * rdm[tmb$idx + 2, 1:2]
-    
+
     if (optim == "nlminb")
       aic <- 2 * length(opt[["par"]]) + 2 * opt[["objective"]]
-    
+
     list(
       predicted = cbind(date = tmb$ts, as.data.frame(rdm)),
       fitted = cbind(date = d$date, as.data.frame(ftd)),
@@ -229,11 +229,11 @@ argos2tmb <-
       factor(d$lc,
              levels = c("3", "2", "1", "0", "A", "B"),
              ordered = TRUE)
-    
+
     ## Merge ARGOS error multiplication factors
     d <- merge(d, amf, by = "lc", all.x = TRUE)
     d <- d[order(d$date),]
-    
+
     ## Interpolation indices and weights
     dt <- tstep * 86400
     tms <- (as.numeric(d$date) - as.numeric(d$date[1])) / dt
@@ -241,7 +241,7 @@ argos2tmb <-
     if (extrap)
       index <- pmax(index, max(index) - 1)
     weights <- 1 - (tms - index)
-    
+
     list(
       y = cbind(d$lon, d$lat),
       K = cbind(d$AMFlon, d$AMFlat),
