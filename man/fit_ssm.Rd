@@ -11,6 +11,8 @@ fit_ssm(d, subset = rep(TRUE, nrow(d)), tstep = 2.4/24, nu = 5,
 \arguments{
 \item{d}{a data frame of observations}
 
+\item{subset}{define with a logical vector the subset of data records to be filtered}
+
 \item{tstep}{the time step to predict to (in days)}
 
 \item{nu}{degrees of freedom parameter}
