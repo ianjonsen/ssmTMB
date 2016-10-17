@@ -4,7 +4,8 @@ Title: A fast state-space model for filtering Argos satellite tracking data,
 Version: 0.0.0.9000
 Authors@R: c(
     person("Ian", "Jonsen", email = "ian.jonsen@mq.edu.au", role = c("aut", "cre")),
-    person("Simon", "Wotherspoon", role = "aut"))
+    person("Simon", "Wotherspoon", role = "aut")
+    )
 Description: Filters and regularises to a specified time step error-prone Argos satellite tracking data
 Depends:
     R (>= 3.3.0),
