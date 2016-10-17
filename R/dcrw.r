@@ -48,11 +48,24 @@
 ##' \item{\code{aic}}{the calculated Akaike Information Criterion}
 ##'
 ##' @examples
-#' \dontrun{
+#'
 #' # Fit DCRW model for state filtering and regularization
 #' data(ellie)
 #' fit <- fit_ssm(ellie, tstep = 6 / 24)
-#' }
+#'
+#' ## plot predicted track over observations
+#' plot(lat ~ lon, filtered_track$data, pch = 3, col = "firebrick")
+#' points(lat ~ lon, filtered_track$predicted, pch = 19, cex = 0.5, col = "dodgerblue")
+#'
+#' ## plot residuals for longitude and latitude
+#' layout(matrix(1:2, 2, 1))
+#' lon.res <- tmp$data$lon - tmp$fitted$lon
+#' lat.res <- tmp$data$lat - tmp$fitted$lat
+#' plot(tmp$data$date, lon.res, xlab = "")
+#' abline(h = 0, lty = 2, col = "red")
+#' plot(tmp$data$date, lat.res, xlab = "date")
+#' abline(h = 0, lty = 2, col = "red")
+#'
 ##'
 ##' @useDynLib ssmTMB
 ##' @importFrom TMB MakeADFun sdreport
