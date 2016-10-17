@@ -18,12 +18,12 @@ R.Version()
 
 On PC's running Windows, you will need to install [Rtools](https://cran.r-project.org/bin/windows/Rtools/) 
 
-Next, you will need to install TMB and it's dependencies:
+Next, you will need to install `TMB` and it's dependencies:
 ```R
 install.packages("TMB")
 ```
 
-Finally, install the devtools package and then the development version of ssmTMB from GitHub:
+Finally, install the `devtools` package and then the development version of `ssmTMB` from GitHub:
 
 ```R
 install.packages("devtools")  
