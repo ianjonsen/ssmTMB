@@ -3,4 +3,5 @@
 language: R
 sudo: false
 cache: packages
-r_binary_packages: TMB, RcppEigen, Matrix
+r_binary_packages: TMB Matrix RcppEigen
+
