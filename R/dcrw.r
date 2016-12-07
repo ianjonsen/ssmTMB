@@ -70,6 +70,7 @@
 ##' @useDynLib ssmTMB
 ##' @importFrom TMB MakeADFun sdreport
 ##' @importFrom stats loess loess.control cov sd predict nlminb
+##' @importFrom dplyr tbl_df
 ##' @export
 fit_ssm <-
   function(d,
@@ -154,7 +155,7 @@ fit_ssm <-
 
     ## TMB - create objective function
     obj <-
-      TMB::MakeADFun(
+      MakeADFun(
         data,
         parameters,
         random = "x",
@@ -173,7 +174,7 @@ fit_ssm <-
       ))
 
     ## Parameters, states and the fitted values
-    rep <- TMB::sdreport(obj)
+    rep <- sdreport(obj)
     fxd <- summary(rep, "report")
 
     rdm <-
@@ -188,10 +189,10 @@ fit_ssm <-
       aic <- 2 * length(opt[["par"]]) + 2 * opt[["objective"]]
 
     list(
-      predicted = cbind(date = tmb$ts, as.data.frame(rdm)),
-      fitted = cbind(date = d$date, as.data.frame(ftd)),
+      predicted = tbl_df(cbind(date = tmb$ts, as.data.frame(rdm))),
+      fitted = tbl_df(cbind(date = d$date, as.data.frame(ftd))),
       par = fxd,
-      data = d,
+      data = tbl_df(d),
       subset = subset,
       tstep = tstep,
       opt = opt,
@@ -293,8 +294,7 @@ amfCRAWL <- function() {
       levels = c("3", "2", "1", "0", "A", "B"),
       ordered = TRUE
     ),
-    AMFlon = c(1, 1.54, 3.72, 23.9,
-               13.51, 44.22),
+    AMFlon = c(1, 1.54, 3.72, 23.9, 13.51, 44.22),
     AMFlat = c(1, 1.29, 2.55, 103.7, 14.99, 32.53)
   )
 }
