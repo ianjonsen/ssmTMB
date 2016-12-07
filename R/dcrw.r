@@ -70,7 +70,6 @@
 ##' @useDynLib ssmTMB
 ##' @importFrom TMB MakeADFun sdreport
 ##' @importFrom stats loess loess.control cov sd predict nlminb
-##' @importFrom dplyr tbl_df
 ##' @export
 fit_ssm <-
   function(d,
@@ -189,10 +188,10 @@ fit_ssm <-
       aic <- 2 * length(opt[["par"]]) + 2 * opt[["objective"]]
 
     list(
-      predicted = tbl_df(cbind(date = tmb$ts, as.data.frame(rdm))),
-      fitted = tbl_df(cbind(date = d$date, as.data.frame(ftd))),
+      predicted = cbind(date = tmb$ts, as.data.frame(rdm)),
+      fitted = cbind(date = d$date, as.data.frame(ftd)),
       par = fxd,
-      data = tbl_df(d),
+      data = d,
       subset = subset,
       tstep = tstep,
       opt = opt,
