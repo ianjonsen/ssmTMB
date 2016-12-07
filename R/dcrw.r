@@ -154,7 +154,7 @@ fit_ssm <-
 
     ## TMB - create objective function
     obj <-
-      MakeADFun(
+      TMB::MakeADFun(
         data,
         parameters,
         random = "x",
@@ -173,7 +173,7 @@ fit_ssm <-
       ))
 
     ## Parameters, states and the fitted values
-    rep <- sdreport(obj)
+    rep <- TMB::sdreport(obj)
     fxd <- summary(rep, "report")
 
     rdm <-
