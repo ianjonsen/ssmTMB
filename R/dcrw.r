@@ -15,7 +15,7 @@
 ##' The TMB parameter list can be specified directly with the
 ##' \code{parameters} argument. Otherwise suitable parameter values
 ##' are estimated from predicted locations estimated by fitting loess
-##' smooths to the raw observations.
+##' smooths to the raw observations. junk - delete later
 ##'
 ##' The filtering model assumes the errors in longitude and latitude
 ##' are proportional to scale factors determined by the location
