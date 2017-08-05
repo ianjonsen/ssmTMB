@@ -44,8 +44,8 @@ Type objective_function<Type>::operator() () {
   cov(1, 0) = cov(0, 1);
   cov(1, 1) = sigma(1) * sigma(1);
 
-  Type nll = 0.0;               // (Complete data) negative log likelihood
-  MVNORM_t<Type> nll_dens(cov);	// Multivariate Normal density
+  parallel_accumulator<Type> nll(this);       // (Complete data) negative log likelihood
+  MVNORM_t<Type> nll_dens(cov);	              // Multivariate Normal density
 
   // Compute the increments
   for(int i = 0; i < d.rows(); ++i)
