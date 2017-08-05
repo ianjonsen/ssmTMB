@@ -19,4 +19,3 @@ ARGOS Error Multiplication Factors for Location Classes
 These are the error multiplication factors used to scale location
 accuracy for each location class that are used in \pkg{crawl}.
 }
-

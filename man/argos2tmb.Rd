@@ -51,4 +51,3 @@ By default the function uses the same ARGOS multiplication factors
 to scale location accuracy by location class as used in
 \pkg{crawl}.
 }
-
