@@ -30,6 +30,7 @@
 ##' @param nu degrees of freedom parameter
 ##' @param gamma the autocorrelation parameter used to estimate
 ##'   initial parameters
+##' @param common.tau estimate a single error sd for both longitude and latitude
 ##' @param parameters the TMB parameter list
 ##' @param optim numerical optimizer
 ##' @param verbose report progress during minimization
@@ -42,7 +43,8 @@
 ##' \item{\code{par}}{model parameter summmary}
 ##' \item{\code{data}}{the input data.frame}
 ##' \item{\code{subset}}{the input subset vector}
-##'\item{\code{tstep}}{the prediction time step}
+##' \item{\code{tstep}}{the prediction time step}
+##' \item{\code{common.tau}}{has a common tau been estimated}
 ##' \item{\code{opt}}{the object returned by the optimizer}
 ##' \item{\code{tmb}}{the TMB object}
 ##' \item{\code{aic}}{the calculated Akaike Information Criterion}
@@ -77,6 +79,7 @@ fit_ssm <-
            tstep = 2.4 / 24,
            nu = 5,
            gamma = 0.5,
+           common.tau = FALSE,
            parameters = NULL,
            optim = c("nlminb", "optim"),
            verbose = FALSE,
@@ -125,18 +128,20 @@ fit_ssm <-
       V <- cov(es)
       sigma <- sqrt(diag(V))
       rho <- V[1, 2] / prod(sqrt(diag(V)))
-      tau <-
-        c(sd(fit.lon$residuals / tmb$K[, 1]),
-          sd(fit.lat$residuals / tmb$K[, 2]))
-
+      if (common.tau) {
+        tau <- sd(c(fit.lon$residuals / tmb$K[, 1],
+                    fit.lat$residuals / tmb$K[, 2]))
+      } else {
+        tau <- c(sd(fit.lon$residuals / tmb$K[, 1]),
+                 sd(fit.lat$residuals / tmb$K[, 2]))
+      }
       parameters <-
         list(
           theta = 0,
           l_gamma = log(gamma / (1 - gamma)),
           l_sigma = log(pmax(1e-08, sigma)),
           l_rho = log((1 + rho) / (1 - rho)),
-          l_tau = log(pmax(1e-08,
-                           tau)),
+          l_tau = log(pmax(1e-08, tau)),
           x = xs
         )
     }
@@ -194,6 +199,7 @@ fit_ssm <-
       data = d,
       subset = subset,
       tstep = tstep,
+      common.tau = common.tau,
       opt = opt,
       tmb = obj,
       aic = aic
