@@ -1,6 +1,6 @@
 Package: ssmTMB
 Title: A fast state-space model for filtering Argos satellite tracking data using TMB
-Version: 0.0.1.9000
+Version: 0.0.1.9100
 Authors@R: c(
     person("Ian", "Jonsen", email = "ian.jonsen@mq.edu.au", role = c("aut", "cre")),
     person("Simon", "Wotherspoon", role = "aut")

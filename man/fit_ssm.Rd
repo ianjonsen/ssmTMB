@@ -5,8 +5,9 @@
 \title{Correlated Random Walk Filter}
 \usage{
 fit_ssm(d, subset = rep(TRUE, nrow(d)), tstep = 2.4/24, nu = 5,
-  gamma = 0.5, parameters = NULL, optim = c("nlminb", "optim"),
-  verbose = FALSE, amf = amfCRAWL(), span = 0.3)
+  gamma = 0.5, common.tau = FALSE, parameters = NULL,
+  optim = c("nlminb", "optim"), verbose = FALSE, amf = amfCRAWL(),
+  span = 0.3)
 }
 \arguments{
 \item{d}{a data frame of observations}
@@ -19,6 +20,8 @@ fit_ssm(d, subset = rep(TRUE, nrow(d)), tstep = 2.4/24, nu = 5,
 
 \item{gamma}{the autocorrelation parameter used to estimate
 initial parameters}
+
+\item{common.tau}{estimate a single error sd for both longitude and latitude}
 
 \item{parameters}{the TMB parameter list}
 
@@ -39,6 +42,7 @@ a list with components
 \item{\code{data}}{the input data.frame}
 \item{\code{subset}}{the input subset vector}
 \item{\code{tstep}}{the prediction time step}
+\item{\code{common.tau}}{has a common tau been estimated}
 \item{\code{opt}}{the object returned by the optimizer}
 \item{\code{tmb}}{the TMB object}
 \item{\code{aic}}{the calculated Akaike Information Criterion}
