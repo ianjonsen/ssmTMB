@@ -2,7 +2,7 @@
 
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 [![Travis-CI Build Status](https://travis-ci.org/ianjonsen/ssmTMB.svg?branch=master)](https://travis-ci.org/ianjonsen/ssmTMB)
-![Downloads badge](https://badged.co/ianjonsen/ssmTMB)
+[![Github Downloads (monthly)](https://img.shields.io/github/downloads/ianjonsen/ssmTMB/latest/total.svg)]()
 
 
 **ssmTMB** - A fast state-space model for filtering Argos satellite tracking data
