@@ -4,7 +4,7 @@
 \alias{argos2tmb}
 \title{ARGOS data pre-processing}
 \usage{
-argos2tmb(d, tstep = 1, extrap = FALSE, amf = amfCRAWL())
+argos2tmb(d, tstep = 1, soth = TRUE, extrap = FALSE, amf = amfCRAWL())
 }
 \arguments{
 \item{d}{a data frame of observations (see details)}

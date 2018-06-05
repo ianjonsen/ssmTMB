@@ -5,7 +5,7 @@
 \title{Correlated Random Walk Filter}
 \usage{
 fit_ssm(d, subset = rep(TRUE, nrow(d)), tstep = 2.4/24, nu = 5,
-  gamma = 0.5, common.tau = FALSE, parameters = NULL,
+  gamma = 0.5, soth = TRUE, common.tau = FALSE, parameters = NULL,
   optim = c("nlminb", "optim"), verbose = FALSE, amf = amfCRAWL(),
   span = 0.3)
 }
@@ -20,6 +20,9 @@ fit_ssm(d, subset = rep(TRUE, nrow(d)), tstep = 2.4/24, nu = 5,
 
 \item{gamma}{the autocorrelation parameter used to estimate
 initial parameters}
+
+\item{soth}{if TRUE states occur on the hour, starting with the hour immediately preceeding the
+time of the first observation; if FALSE states occur relative to the time of the first observation}
 
 \item{common.tau}{estimate a single error sd for both longitude and latitude}
 
