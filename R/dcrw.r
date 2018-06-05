@@ -30,6 +30,8 @@
 ##' @param nu degrees of freedom parameter
 ##' @param gamma the autocorrelation parameter used to estimate
 ##'   initial parameters
+##' @param soth if TRUE states occur on the hour, starting with the hour immediately preceeding the
+##'   time of the first observation; if FALSE states occur relative to the time of the first observation
 ##' @param common.tau estimate a single error sd for both longitude and latitude
 ##' @param parameters the TMB parameter list
 ##' @param optim numerical optimizer
@@ -79,6 +81,7 @@ fit_ssm <-
            tstep = 2.4 / 24,
            nu = 5,
            gamma = 0.5,
+           soth = TRUE,
            common.tau = FALSE,
            parameters = NULL,
            optim = c("nlminb", "optim"),
@@ -93,7 +96,7 @@ fit_ssm <-
     d <- d[order(d$date),]
 
     ## pre-process ARGOS data to obtain interpolation indices & weights generate data list
-    tmb <- argos2tmb(d, tstep = tstep, amf = amf)
+    tmb <- argos2tmb(d, tstep = tstep, soth = soth, amf = amf)
 
     ## Predict track from loess smooths
     fit.lon <-
@@ -251,6 +254,7 @@ fit_ssm <-
 argos2tmb <-
   function(d,
            tstep = 1,
+           soth = TRUE,
            extrap = FALSE,
            amf = amfCRAWL()) {
     ## Check ARGOS location accuracies
@@ -271,12 +275,16 @@ argos2tmb <-
       index <- pmax(index, max(index) - 1)
     weights <- 1 - (tms - index)
 
+    if(soth) ts <- seq(trunc(d$date[1], "hour"), by = dt, length.out = max(index) + 2)
+    else {
+      ts <- seq(d$date[1], by = dt, length.out = max(index) + 2)
+    }
     list(
       y = cbind(d$lon, d$lat),
       K = cbind(d$AMFlon, d$AMFlat),
       idx = index,
       ws = weights,
-      ts = seq(d$date[1], by = dt, length.out = max(index) + 2),
+      ts = ts,
       dt = dt
     )
   }
