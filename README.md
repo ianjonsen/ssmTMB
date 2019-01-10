@@ -1,7 +1,6 @@
 # ssmTMB
 
 [![Project Status: Abandoned – Initial development has started, but there has not yet been a stable, usable release; the project has been abandoned and the author(s) do not intend on continuing development.](https://www.repostatus.org/badges/latest/abandoned.svg)](https://www.repostatus.org/#abandoned)
-[![Github Downloads (monthly)](https://img.shields.io/github/downloads/ianjonsen/ssmTMB/latest/total.svg)]()
 
 
 **ssmTMB** - A fast state-space model for filtering Argos satellite tracking data
