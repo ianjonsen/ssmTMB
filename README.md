@@ -7,4 +7,4 @@
 
 This is a minimal package that state-space filters and regularises to a specified time step error-prone Argos satellite tracking data. The fast estimation is acheived by using the Template Model Builder (TMB) package that provides C++ templates.
 
-# All current and future development has been moved to the foieGras repository
+# All current and future development has been moved to the `foieGras` repository 
